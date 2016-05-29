@@ -8,7 +8,7 @@ module AppConfig
 
       #Set app configration from config.yaml
       base_name = File.basename(file, ".rb")
-      (base.const_get base_name.capitalize).set_options(config)
+      (base.const_get base_name.capitalize).set_options config
     end
   end
 end
