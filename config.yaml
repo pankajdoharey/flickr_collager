@@ -1,0 +1,4 @@
+#Collage Search app config options.
+
+options:
+  MIN_WORD_COUNT: 10
