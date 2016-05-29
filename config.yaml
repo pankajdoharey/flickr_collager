@@ -3,4 +3,12 @@
 options:
   MIN_WORD_COUNT: 10
   DICT_PATH: '/usr/share/dict/words'
+
+flickr:
+  API_KEY: 'ad64d62711835b7016fd6bcc162dc9d0'
+  API_SECRET: 'beb831a68a192ac6'
+  API_URL: 'https://api.flickr.com/services/rest/?'
+  API_FORMAT: 'json'
+  API_METHOD: 'flickr.photos.search'
+  API_SORT: 'relevance'
   
