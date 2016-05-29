@@ -1,4 +1,4 @@
 source "https://rubygems.org"
 
 gem 'minitest'
-gem 'rmagick'
+gem 'mini_magick'
