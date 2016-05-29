@@ -2,3 +2,5 @@
 
 options:
   MIN_WORD_COUNT: 10
+  DICT_PATH: '/usr/share/dict/words'
+  
