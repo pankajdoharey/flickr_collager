@@ -11,4 +11,12 @@ flickr:
   API_FORMAT: 'json'
   API_METHOD: 'flickr.photos.search'
   API_SORT: 'relevance'
+  TEMP_DIR: '/tmp/collage'
+
+minimagick:
+  ROW: 2
+  COLUMNS: 5
+  BG_COLOR: 'black'
+  BORDR_COLOR: 'white'
+  BORDR_SIZE: 20
   
