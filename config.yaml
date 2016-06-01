@@ -13,10 +13,10 @@ flickr:
   API_SORT: 'relevance'
   TEMP_DIR: '/tmp/collage'
 
-minimagick:
-  ROW: 2
+imagemagick:
+  ROWS: 2
   COLUMNS: 5
-  BG_COLOR: 'black'
-  BORDR_COLOR: 'white'
-  BORDR_SIZE: 20
+  BG_COLOR: 'white'
+  BORDR_SIZE: '+5+5'
+  IMG_SIZE: 1000
   

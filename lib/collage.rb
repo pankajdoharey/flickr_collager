@@ -7,9 +7,13 @@ class Collage
   end
 
   def download_images
+    char = %w[| / - \\].cycle
     @search_words.each do |word|
+      print "\b"
       search_and_save_flickr_image word
+      print char.next
     end
+    print "\b."
     self
   end
 

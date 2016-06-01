@@ -1,0 +1,37 @@
+#!/usr/bin/env ruby
+require 'optparse'
+require_relative '../loader'
+
+class CollageParser
+  def self.parse(params)
+    args  = {:words => nil, :outfile => nil}
+    OptionParser.new do |opts|
+      opts.banner = "Usage: collage -w word1,word2..wordN -o outfile.png"
+      opts.on("-w" ,"--words ", Array, "Flickr Search Words") do |w|
+        args[:words] = w
+      end
+
+      opts.on("-o", "--out-file ", String, "Output File") do |f|
+        args[:outfile] = f
+      end
+
+      opts.on_tail("-h", "--help", "Show this message") do
+        puts opts
+        exit
+      end
+    end.parse! params
+    args
+  end
+end
+
+args = if ARGV.empty?
+  %w[--help]
+else
+  ARGV
+end
+
+options = CollageParser.parse args
+collage = Collage.new options[:words]
+collage.download_images.build options[:outfile]
+
+

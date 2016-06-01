@@ -7,14 +7,7 @@ module ::AppConfig::FlickrSearch
 
   def search_and_save_flickr_image(text)
     uri = URI(search_flickr_for text)
-
-    Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
-      filepath = File.join(TEMP_DIR, File.basename(uri.path))
-      open(filepath , "wb") do |file|
-        file.write http.get(uri).read_body
-        file.close
-      end
-    end
+    download_and_write_to_file uri
   end
 
   def search_flickr_for(search_term)
@@ -26,10 +19,20 @@ module ::AppConfig::FlickrSearch
   end
 
   def get_image_list
-    Dir[TEMP_DIR << "/*"]
+    Dir[TEMP_DIR + "/*"]
   end
 
   private
+
+  def download_and_write_to_file(uri)
+    Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+      filepath = File.join(TEMP_DIR, File.basename(uri.path))
+      open(filepath , "wb") do |file|
+        file.write http.get(uri).read_body
+        file.close
+      end
+    end
+  end
 
   def build_query_for(word)
     uri = get_uri_for word
