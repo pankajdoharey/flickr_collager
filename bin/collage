@@ -34,4 +34,12 @@ options = CollageParser.parse args
 collage = Collage.new options[:words]
 collage.download_images.build options[:outfile]
 
+if RUBY_PLATFORM.downcase =~ /darwin/
+  sh "open #{options[:outfile]}"
+elsif  RUBY_PLATFORM.downcase =~ /linux/
+  sh "eog  #{options[:outfile]}"
+elsif RUBY_PLATFORM.downcase =~ /mswin/
+  puts "Dude Seriously, Windows?"
+end
+
 
