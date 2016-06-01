@@ -1,5 +1,6 @@
 require_relative 'lib/string_refinements'
 require_relative 'lib/app_config'
+require 'fileutils'
 
 Gem::Specification.new do |gem|
   gem.name          = "flickr_collager"
@@ -16,4 +17,14 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.add_dependency "rake", "~> 11.1.2"
   gem.add_dependency "minitest", "~> 5.9.0"
+  gem.post_install_message = (
+    unless File.directory?(File.expand_path("~/.collage", __FILE__))
+      FileUtils.mkdir(File.expand_path("~/.collage/"))
+    end
+    FileUtils.cp("config.yaml", File.expand_path("~/.collage/config.yaml", __FILE__))
+    puts %Q{
+        A basic Yaml Configuration file has been copied to ~/.collage/config.yaml
+        you modify that to change some setting.
+        }
+  )
 end

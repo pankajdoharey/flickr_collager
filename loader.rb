@@ -10,8 +10,6 @@ require 'fileutils'
 require 'string_refinements'
 require 'app_config'
 require 'dictionary'
-require 'flickr_search'
-require 'magick_collage'
 require 'collage'
 
 class Collage
