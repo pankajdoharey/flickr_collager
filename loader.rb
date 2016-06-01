@@ -2,7 +2,6 @@
   $:<< File.expand_path(dir, __FILE__)
 end
 
-require 'bundler/setup'
 require 'yaml'
 require 'net/http'
 require 'json'
