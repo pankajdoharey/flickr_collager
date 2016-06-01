@@ -11,6 +11,10 @@ Also the project can be made into a gem
 
 by doing a ```bundle``` and then building the gem by executing ```gem build flickr_collager.gemspec```
 
+Once the gem in built it can be installed by :
+
+```gem install flickr_collager-0.0.1.gem```
+
 Once te gem is installed into installs a executable called ```collage``` which can used as follows :
 
 ### Example Usage :
