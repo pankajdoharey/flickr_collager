@@ -15,7 +15,9 @@ Once the gem in built it can be installed by :
 
 ```gem install flickr_collager-0.0.1.gem```
 
-Once te gem is installed into installs a executable called ```collage``` which can used as follows :
+Before Installing the gem make sure Imagemagick is installed.
+
+Once the gem is installed into installs a executable called ```collage``` which can used as follows :
 
 ### Example Usage :
 
