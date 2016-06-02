@@ -18,4 +18,3 @@ class Collage
   include FlickrSearch
   include MagickCollage
 end
-

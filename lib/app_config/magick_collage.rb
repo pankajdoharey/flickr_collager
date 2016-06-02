@@ -8,10 +8,10 @@ module ::AppConfig::MagickCollage
   def build(file="collage.jpg")
     crop_images
     system [
-      "montage", "#{::AppConfig::FlickrSearch::TEMP_DIR}/cropped*.png",
+      "montage #{::AppConfig::FlickrSearch::TEMP_DIR}/cropped*.png",
       "-geometry #{IMG_SIZE/COLUMNS}x#{IMG_SIZE/COLUMNS}#{BORDR_SIZE}",
       "-background #{BG_COLOR}",
-      "-tile #{COLUMNS}x#{ROWS}", file ,
+      "-tile #{COLUMNS}x#{ROWS}", file,
       "2>/dev/null"
     ].join(" ")
   end
@@ -19,7 +19,7 @@ module ::AppConfig::MagickCollage
   def crop_images
     system [
       "convert",
-      "#{::AppConfig::FlickrSearch::TEMP_DIR}/*.jpg" , "-gamma .45455",
+      "#{::AppConfig::FlickrSearch::TEMP_DIR}/*.jpg -gamma .45455",
       "-crop #{IMG_SIZE/COLUMNS}x#{IMG_SIZE/COLUMNS}+0+0 +repage",
       "-gamma 2.2 #{::AppConfig::FlickrSearch::TEMP_DIR}/cropped.png",
       "2>/dev/null"

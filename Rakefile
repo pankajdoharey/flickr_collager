@@ -16,7 +16,14 @@ namespace :app do
     end
   end
 
-  task :all => ['app:test:collage', 'app:test:flickr', 'app:test:magick']
+  namespace :gem do
+    task :build do
+      desc "Build The Flickr Collager 'gem'."
+      system "gem build flickr_collager.gemspec"
+    end
+  end
+
+  task :all => ['app:test:collage', 'app:test:flickr', 'app:test:magick', 'app:gem:build']
 end
 
 desc "All Tasks"
@@ -30,3 +37,6 @@ task 'test:flickr' => 'app:test:flickr'
 
 desc "Test ImageMagick inetrface API"
 task 'test:magick' => 'app:test:magick'
+
+desc "Build the Flickr Collager 'gem'"
+task 'gem:build' => 'app:gem:build'
