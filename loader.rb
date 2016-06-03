@@ -1,5 +1,5 @@
 ['../lib', '../lib/app_config'].each do |dir|
-  $:<< File.expand_path(dir, __FILE__)
+  $LOAD_PATH << File.expand_path(dir, __FILE__)
 end
 
 require 'yaml'

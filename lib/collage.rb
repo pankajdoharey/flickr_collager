@@ -7,7 +7,7 @@ class Collage
   end
 
   def download_images
-    char = %w[| / - \\].cycle
+    char = %w(| / - \\).cycle
     @search_words.each do |word|
       print "\b\b"
       search_and_save_flickr_image word
@@ -20,13 +20,11 @@ class Collage
   private
 
   def create_and_clean_temp_directory
-    if File.directory?(TEMP_DIR)
-      FileUtils.remove_dir(TEMP_DIR)
-    end
+    FileUtils.remove_dir(TEMP_DIR) if File.directory?(TEMP_DIR)
     FileUtils.mkdir(TEMP_DIR)
   end
 
-  def fill_missing words
+  def fill_missing(words)
     if words.count < MIN_WORD_COUNT
       (MIN_WORD_COUNT - words.count).times do
         words << @@dictionary.sample

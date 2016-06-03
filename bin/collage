@@ -4,18 +4,18 @@ require_relative '../loader'
 
 class CollageParser
   def self.parse(params)
-    args  = {:words => nil, :outfile => nil}
+    args = {}
     OptionParser.new do |opts|
-      opts.banner = "Usage: collage -w word1,word2..wordN -o outfile.png"
-      opts.on("-w" ,"--words ", Array, "Flickr Search Words") do |w|
+      opts.banner = 'Usage: collage -w word1,word2..wordN -o outfile.png'
+      opts.on('-w', '--words ', Array, 'Flickr Search Words') do |w|
         args[:words] = w
       end
 
-      opts.on("-o", "--out-file ", String, "Output File") do |f|
+      opts.on('-o', '--out-file ', String, 'Output File') do |f|
         args[:outfile] = f
       end
 
-      opts.on_tail("-h", "--help", "Show this message") do
+      opts.on_tail('-h', '--help', 'Show this message') do
         puts opts
         exit
       end
@@ -25,9 +25,9 @@ class CollageParser
 end
 
 args = if ARGV.empty?
-  %w[--help]
-else
-  ARGV
+         %w(--help)
+       else
+         ARGV
 end
 
 options = CollageParser.parse args
@@ -39,7 +39,5 @@ if RUBY_PLATFORM.downcase =~ /darwin/
 elsif  RUBY_PLATFORM.downcase =~ /linux/
   fork { system "eog  #{options[:outfile]}" }
 elsif RUBY_PLATFORM.downcase =~ /mswin/
-  puts "Dude Seriously, Windows?"
+  puts 'Dude Seriously, Windows?'
 end
-
-

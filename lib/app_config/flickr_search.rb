@@ -1,12 +1,12 @@
-module ::AppConfig::FlickrSearch
-  def self.set_options config
-    config["flickr"].each do |key, val|
-      self.const_set(key, val)
+module AppConfig::FlickrSearch
+  def self.set_options(config)
+    config['flickr'].each do |key, val|
+      const_set(key, val)
     end
   end
 
   def search_and_save_flickr_image(text)
-    uri = URI(search_flickr_for text)
+    uri = URI(search_flickr_for(text))
     download_and_write_to_file uri
   end
 
@@ -19,7 +19,7 @@ module ::AppConfig::FlickrSearch
   end
 
   def get_image_list
-    Dir[TEMP_DIR + "/*"]
+    Dir[TEMP_DIR + '/*']
   end
 
   private
@@ -27,7 +27,7 @@ module ::AppConfig::FlickrSearch
   def download_and_write_to_file(uri)
     Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
       filepath = File.join(TEMP_DIR, File.basename(uri.path))
-      open(filepath , "wb") do |file|
+      open(filepath, 'wb') do |file|
         file.write http.get(uri).read_body
         file.close
       end
@@ -43,23 +43,21 @@ module ::AppConfig::FlickrSearch
     end
   end
 
-  def get_uri_for search_text
+  def get_uri_for(search_text)
     URI(
       uri_builder(
-        API_URL, {
-          format: API_FORMAT, sort: API_SORT,
-          method: API_METHOD, text: search_text,
-          tag_mode: :all, api_key: API_KEY
-        }
+        API_URL, format: API_FORMAT, sort: API_SORT,
+                 method: API_METHOD, text: search_text,
+                 tag_mode: :all, api_key: API_KEY
       )
     )
   end
 
-  def uri_builder(url, params={})
-    url + params.each_pair.map{|k,v| "#{k}=#{v}"}.join("&")
+  def uri_builder(url, params = {})
+    url + params.each_pair.map { |k, v| "#{k}=#{v}" }.join('&')
   end
 
-  def construct_image_url_from json
-    "https://farm#{json["farm"]}.staticflickr.com/#{json["server"]}/#{json["id"]}_#{json["secret"]}.jpg"
+  def construct_image_url_from(json)
+    "https://farm#{json['farm']}.staticflickr.com/#{json['server']}/#{json['id']}_#{json['secret']}.jpg"
   end
 end
