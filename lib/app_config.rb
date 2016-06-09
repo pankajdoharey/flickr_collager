@@ -1,16 +1,15 @@
 module AppConfig
   using Camelizer
 
-  def self.included(_klass)
-    base = self
+  def self.included(klass)
     config = YAML.load_file(path_finder)
 
     Dir.glob File.expand_path('../app_config/*.rb', __FILE__) do |file|
       require file
 
       # Set app configration from config.yaml
-      base_name = File.basename(file, '.rb')
-      (base.const_get base_name.camelize).set_options config
+      file_basename = File.basename(file, '.rb')
+      (klass.const_get file_basename.camelize).options config
     end
   end
 

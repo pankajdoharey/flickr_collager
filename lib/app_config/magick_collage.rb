@@ -1,5 +1,5 @@
 module AppConfig::MagickCollage
-  def self.set_options(config)
+  def self.options(config)
     config['imagemagick'].each do |key, val|
       const_set(key, val)
     end
