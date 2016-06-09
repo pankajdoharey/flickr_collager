@@ -28,11 +28,8 @@ class Collage
 
   def fill_missing(words)
     if words.count < MIN_WORD_COUNT
-      (MIN_WORD_COUNT - words.count).times do
-        words << new_word
-      end
+      (MIN_WORD_COUNT - words.count).times { words << new_word }
     end
-
     words
   end
 

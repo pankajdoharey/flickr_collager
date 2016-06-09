@@ -17,7 +17,7 @@ module AppConfig::FlickrSearch
     json_response = JSON.parse response_data
     construct_image_url_from json_response
   rescue JSON::ParserError
-    puts "\nRetrying ... JSON Parser Error Detected."
+    puts '\nRetrying ... JSON Parser Error Detected.'
     search_flickr_for(new_word)
   end
 
@@ -63,6 +63,9 @@ module AppConfig::FlickrSearch
   end
 
   def construct_image_url_from(json)
-    "https://farm#{json['farm']}.staticflickr.com/#{json['server']}/#{json['id']}_#{json['secret']}.jpg"
+    <<-URL.gsub(/\s+/, '').strip
+    https://farm#{json['farm']}.staticflickr.com/
+    #{json['server']}/#{json['id']}_#{json['secret']}.jpg
+    URL
   end
 end
