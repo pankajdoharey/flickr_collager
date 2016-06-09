@@ -52,7 +52,7 @@ class Collage
     loop {
       print "\b\b"
       print " #{char.next}"
-      sleep 0.1
+      sleep 0.05
     }
   end
 end
