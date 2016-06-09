@@ -37,7 +37,7 @@ class Collage
 
   def new_word
     word = DICTIONARY.sample
-    if is_ascii?(word)
+    if ascii?(word)
       word
     else
       puts "\nNon-Ascii Word Detected : #{word}. Retrying ..."
@@ -45,7 +45,7 @@ class Collage
     end
   end
 
-  def is_ascii?(word)
+  def ascii?(word)
     word.force_encoding('UTF-8').ascii_only?
   end
 
