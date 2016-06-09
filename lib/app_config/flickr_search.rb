@@ -41,14 +41,14 @@ module AppConfig
     end
 
     def build_query_for(word)
-      uri = get_uri_for word
+      uri = uri_for word
       Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
         request = Net::HTTP::Get.new uri
         http.request request
       end
     end
 
-    def get_uri_for(search_text)
+    def uri_for(search_text)
       URI(
         uri_builder(
           url: API_URL, format: API_FORMAT, sort: API_SORT,
@@ -60,8 +60,8 @@ module AppConfig
 
     def uri_builder(params = {})
       url = params[:url]
-      query_params = params.reject { |k, _| k == :url }
-      url + query_params.each_pair.map { |k, v| "#{k}=#{v}" }.join('&')
+      params.reject! { |k, _| k == :url }
+      url + params.each_pair.map { |k, v| "#{k}=#{v}" }.join('&')
     end
 
     def construct_image_url_from(json)
