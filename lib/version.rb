@@ -1,3 +1,5 @@
-module AppConfig::Version
-  STRING = '0.0.1'.freeze
+module AppConfig
+  module Version
+    STRING = '0.0.1'.freeze
+  end
 end

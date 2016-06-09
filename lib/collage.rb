@@ -34,7 +34,7 @@ class Collage
   end
 
   def new_word
-    word = @@dictionary.sample
+    word = DICTIONARY.sample
     if word.force_encoding('UTF-8').ascii_only?
       word
     else
