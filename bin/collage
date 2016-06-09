@@ -28,7 +28,7 @@ args = if ARGV.empty?
          %w(--help)
        else
          ARGV
-end
+       end
 
 options = CollageParser.parse args
 collage = Collage.new options[:words]

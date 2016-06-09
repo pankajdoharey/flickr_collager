@@ -45,7 +45,6 @@ module AppConfig::FlickrSearch
 
   def build_query_for(word)
     uri = get_uri_for word
-
     Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
       request = Net::HTTP::Get.new uri
       http.request request
@@ -55,15 +54,16 @@ module AppConfig::FlickrSearch
   def get_uri_for(search_text)
     URI(
       uri_builder(
-        API_URL, format: API_FORMAT, sort: API_SORT,
-                 method: API_METHOD, text: search_text,
-                 tag_mode: :all, api_key: API_KEY
+        url: API_URL, format: API_FORMAT, sort: API_SORT,
+        method: API_METHOD, text: search_text,
+        tag_mode: :all, api_key: API_KEY
       )
     )
   end
 
-  def uri_builder(url, params = {})
-    url + params.each_pair.map { |k, v| "#{k}=#{v}" }.join('&')
+  def uri_builder(params = {})
+    urlstring = params.each_pair.map{ |k, v| k == :url ? "#{v}" : "#{k}=#{v}" }
+    url = urlstring[0] + urlstring[1..-1].join("&")
   end
 
   def construct_image_url_from(json)
