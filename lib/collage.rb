@@ -37,10 +37,11 @@ class Collage
   def get_new_word
     begin
       word = @@dictionary.sample
-      if word =~ /[^[:print:]]/ #Check if the word is non ascii ?
-        raise
-      else
+      if word.force_encoding("UTF-8").ascii_only?
         word
+      else
+        puts "\nRetrying Non-Ascii Word Detected : #{word}"
+        raise
       end
     rescue
       retry
