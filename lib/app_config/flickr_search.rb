@@ -11,16 +11,14 @@ module AppConfig::FlickrSearch
   end
 
   def search_flickr_for(search_term)
-    begin
-      response_body = build_query_for(search_term).read_body
-      response_data = response_body.to_s.match(/\[([^\}]+)\}/)[0]
-                      .sub(/^\[/, '')
-      json_response = JSON.parse response_data
-      construct_image_url_from json_response
-    rescue JSON::ParserError
-      puts "\nRetrying ... JSON Parser Error Detected."
-      search_flickr_for(get_new_word)
-    end
+    response_body = build_query_for(search_term).read_body
+    response_data = response_body.to_s.match(/\[([^\}]+)\}/)[0]
+                    .sub(/^\[/, '')
+    json_response = JSON.parse response_data
+    construct_image_url_from json_response
+  rescue JSON::ParserError
+    puts "\nRetrying ... JSON Parser Error Detected."
+    search_flickr_for(get_new_word)
   end
 
   def get_image_list
@@ -30,17 +28,15 @@ module AppConfig::FlickrSearch
   private
 
   def download_and_write_to_file(uri)
-    begin
-      Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
-        filepath = File.join(TEMP_DIR, File.basename(uri.path))
-        open(filepath, 'wb') do |file|
-          file.write http.get(uri).read_body
-          file.close
-        end
+    Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+      filepath = File.join(TEMP_DIR, File.basename(uri.path))
+      open(filepath, 'wb') do |file|
+        file.write http.get(uri).read_body
+        file.close
       end
-    rescue URI::InvalidURIError
-      puts "URI::InvalidURIError Detected"
     end
+  rescue URI::InvalidURIError
+    puts 'URI::InvalidURIError Detected'
   end
 
   def build_query_for(word)
@@ -62,8 +58,8 @@ module AppConfig::FlickrSearch
   end
 
   def uri_builder(params = {})
-    urlstring = params.each_pair.map{ |k, v| k == :url ? "#{v}" : "#{k}=#{v}" }
-    url = urlstring[0] + urlstring[1..-1].join("&")
+    urlstring = params.each_pair.map { |k, v| k == :url ? v.to_s : "#{k}=#{v}" }
+    urlstring[0] + urlstring[1..-1].join('&')
   end
 
   def construct_image_url_from(json)

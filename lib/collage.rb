@@ -9,10 +9,10 @@ class Collage
   def download_images
     Thread.new { animate_cursor }
     @search_words.each do |word|
-      Thread.new {
+      Thread.new do
         search_and_save_flickr_image word
-        print ".."
-      }.join
+        print '..'
+      end.join
     end
     self
   end
@@ -35,25 +35,23 @@ class Collage
   end
 
   def get_new_word
-    begin
-      word = @@dictionary.sample
-      if word.force_encoding("UTF-8").ascii_only?
-        word
-      else
-        puts "\nRetrying Non-Ascii Word Detected : #{word}"
-        raise
-      end
-    rescue
-      retry
+    word = @@dictionary.sample
+    if word.force_encoding('UTF-8').ascii_only?
+      word
+    else
+      puts "\nRetrying Non-Ascii Word Detected : #{word}"
+      raise
     end
+  rescue
+    retry
   end
 
   def animate_cursor
     char = %w(| / - \\).cycle
-    loop {
+    loop do
       print "\b\b"
       print " #{char.next}"
       sleep 0.05
-    }
+    end
   end
 end

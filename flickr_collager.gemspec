@@ -18,5 +18,5 @@ Gem::Specification.new do |gem|
   gem.require_paths = ['lib']
   gem.add_dependency 'rake', '11.1.2'
   gem.add_dependency 'minitest', '5.9.0'
-  gem.post_install_message = AppConfig::PostInstall::message
+  gem.post_install_message = AppConfig::PostInstall.message
 end
