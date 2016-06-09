@@ -9,8 +9,10 @@ class Collage
   def download_images
     Thread.new { animate_cursor }
     @search_words.each do |word|
-      search_and_save_flickr_image word
-      print ".."
+      Thread.new {
+        search_and_save_flickr_image word
+        print ".."
+      }.join
     end
     self
   end
@@ -25,11 +27,24 @@ class Collage
   def fill_missing(words)
     if words.count < MIN_WORD_COUNT
       (MIN_WORD_COUNT - words.count).times do
-        words << @@dictionary.sample
+        words << get_new_word
       end
     end
 
     words
+  end
+
+  def get_new_word
+    begin
+      word = @@dictionary.sample
+      if word =~ /[^[:print:]]/ #Check if the word is non ascii ?
+        raise
+      else
+        word
+      end
+    rescue
+      retry
+    end
   end
 
   def animate_cursor

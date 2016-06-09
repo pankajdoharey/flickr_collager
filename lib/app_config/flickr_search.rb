@@ -11,11 +11,16 @@ module AppConfig::FlickrSearch
   end
 
   def search_flickr_for(search_term)
-    response_body = build_query_for(search_term).read_body
-    response_data = response_body.to_s.match(/\[([^\}]+)\}/)[0]
-                    .sub(/^\[/, '')
-    json_response = JSON.parse response_data
-    construct_image_url_from json_response
+    begin
+      response_body = build_query_for(search_term).read_body
+      response_data = response_body.to_s.match(/\[([^\}]+)\}/)[0]
+                      .sub(/^\[/, '')
+      json_response = JSON.parse response_data
+      construct_image_url_from json_response
+    rescue JSON::ParserError
+      puts "\nRetrying ... We got a parse Error"
+      search_flickr_for(get_new_word)
+    end
   end
 
   def get_image_list
@@ -25,12 +30,16 @@ module AppConfig::FlickrSearch
   private
 
   def download_and_write_to_file(uri)
-    Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
-      filepath = File.join(TEMP_DIR, File.basename(uri.path))
-      open(filepath, 'wb') do |file|
-        file.write http.get(uri).read_body
-        file.close
+    begin
+      Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+        filepath = File.join(TEMP_DIR, File.basename(uri.path))
+        open(filepath, 'wb') do |file|
+          file.write http.get(uri).read_body
+          file.close
+        end
       end
+    rescue URI::InvalidURIError
+      puts "URI::InvalidURIError Detected"
     end
   end
 
