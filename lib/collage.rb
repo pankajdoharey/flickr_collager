@@ -38,11 +38,9 @@ class Collage
     if word.force_encoding('UTF-8').ascii_only?
       word
     else
-      puts "\nRetrying Non-Ascii Word Detected : #{word}"
-      raise
+      puts "\nNon-Ascii Word Detected : #{word}. Retrying ..."
+      new_word
     end
-  rescue
-    retry
   end
 
   def animate_cursor
