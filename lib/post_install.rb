@@ -4,9 +4,9 @@ module AppConfig::PostInstall
       FileUtils.mkdir(File.expand_path('~/.collage/'))
       FileUtils.cp('config.yaml', File.expand_path('~/.collage/config.yaml', __FILE__))
       puts <<-MESSAGE
-        A basic Yaml Configuration file has been copied to ~/.collage/config.yaml
-        you modify that to change some setting.
-        MESSAGE
+      A basic Yaml Configuration file has been copied to ~/.collage/config.yaml
+      you modify that to change some setting.
+      MESSAGE
     end
   end
 end

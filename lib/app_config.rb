@@ -1,3 +1,5 @@
+# Main Container module to namespace the application and its various parts
+# are submodules inside this module.
 module AppConfig
   using Camelizer
 

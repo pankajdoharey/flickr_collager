@@ -23,7 +23,10 @@ namespace :app do
     end
   end
 
-  task all: ['app:test:collage', 'app:test:flickr', 'app:test:magick', 'app:gem:build']
+  task all: [
+    'app:test:collage', 'app:test:flickr',
+    'app:test:magick', 'app:gem:build'
+  ]
 end
 
 desc 'All Tasks'

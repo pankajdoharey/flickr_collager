@@ -1,3 +1,5 @@
+# Collage is the main class that kicks off various code for searching,
+# downloading and stitching together images to produce collage
 class Collage
   attr_reader :search_words
 
@@ -27,14 +29,14 @@ class Collage
   def fill_missing(words)
     if words.count < MIN_WORD_COUNT
       (MIN_WORD_COUNT - words.count).times do
-        words << get_new_word
+        words << new_word
       end
     end
 
     words
   end
 
-  def get_new_word
+  def new_word
     word = @@dictionary.sample
     if word.force_encoding('UTF-8').ascii_only?
       word
