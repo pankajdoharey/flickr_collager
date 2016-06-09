@@ -9,15 +9,15 @@ class Collage
   end
 
   def download_images
-    pool = []
     Thread.new { animate_cursor }
-    @search_words.each do |word|
-      pool << Thread.new do
-        search_and_save_flickr_image word
-        print '..'
-      end
+    @search_words.each_slice(COLUMNS) do |slice|
+      slice.map do |word|
+        Thread.new do
+          search_and_save_flickr_image word
+          print '..'
+        end
+      end.each(&:join)
     end
-    pool.each(&:join)
     self
   end
 
