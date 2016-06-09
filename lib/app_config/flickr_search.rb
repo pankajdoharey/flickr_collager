@@ -18,7 +18,7 @@ module AppConfig::FlickrSearch
     construct_image_url_from json_response
   rescue JSON::ParserError
     puts "\nRetrying ... JSON Parser Error Detected."
-    search_flickr_for(get_new_word)
+    search_flickr_for(new_word)
   end
 
   def get_image_list
