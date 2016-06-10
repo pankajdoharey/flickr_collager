@@ -9,13 +9,13 @@ class Collage
   end
 
   def download_images
-    Thread.new { animate_cursor }
+    Thread.new { animate_cursor }.run
     @search_words.each_slice(COLUMNS) do |slice|
       slice.map do |word|
         Thread.new do
           search_and_save_flickr_image word
-          print '..'
-        end
+          print "**"
+        end.run
       end.each(&:join)
     end
     self
@@ -52,8 +52,8 @@ class Collage
   def animate_cursor
     char = %w(| / - \\).cycle
     loop do
-      print "\b\b"
-      print " #{char.next}"
+      print "\b"
+      print "#{char.next}"
       sleep 0.05
     end
   end
