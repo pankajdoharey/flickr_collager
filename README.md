@@ -1,7 +1,9 @@
 #Flickr Collager
 
-## The following programming is related to Flickr Search in ruby using Commandline
+## Flickr image search and Collage Creator.
 
+
+## To build
 There is a rakefile for all the tests, the list of all Rake tasks available can be
 seen by :
 
@@ -19,7 +21,7 @@ Before Installing the gem make sure Imagemagick is installed.
 
 Once the gem is installed into installs a executable called ```collage``` which can used as follows :
 
-### Example Usage :
+## Usage :
 
 ```collage -w pen,pencil,rose,women,brizil,everest,sunshine --out-file collage.png```
 
