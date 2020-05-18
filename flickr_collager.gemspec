@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
   gem.executables   = gem.files.grep(%r{^bin/}).map { |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ['lib']
-  gem.add_dependency 'rake', '11.1.2'
+  gem.add_dependency 'rake', '>= 12.3.3'
   gem.add_dependency 'minitest', '5.9.0'
   gem.post_install_message = AppConfig::PostInstall.message
 end

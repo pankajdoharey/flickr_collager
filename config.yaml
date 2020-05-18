@@ -5,8 +5,8 @@ options:
   DICT_PATH: '/usr/share/dict/words'
 
 flickr:
-  API_KEY: 'ad64d62711835b7016fd6bcc162dc9d0'
-  API_SECRET: 'beb831a68a192ac6'
+  API_KEY: '<Your Flickr Key>'
+  API_SECRET: '<Your Flickr Secret>'
   API_URL: 'https://api.flickr.com/services/rest/?'
   API_FORMAT: 'json'
   API_METHOD: 'flickr.photos.search'

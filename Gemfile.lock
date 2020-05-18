@@ -1,0 +1,21 @@
+PATH
+  remote: .
+  specs:
+    flickr_collager (0.0.1)
+      minitest (= 5.9.0)
+      rake (= 11.1.2)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    minitest (5.9.0)
+    rake (11.1.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  flickr_collager!
+
+BUNDLED WITH
+   2.1.4
